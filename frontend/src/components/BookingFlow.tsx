@@ -32,7 +32,8 @@ export default function BookingFlow() {
   const [bookingStatus, setBookingStatus] = useState<"idle" | "success" | "error">("idle");
 
   useEffect(() => {
-    fetch("/api/services")
+    const API = import.meta.env.VITE_API_URL || "";
+    fetch(`${API}/api/services`)
       .then((res) => res.json())
       .then(setServices);
   }, []);
@@ -40,7 +41,8 @@ export default function BookingFlow() {
   useEffect(() => {
     if (step === 2 || step === 3) {
       const dateStr = format(selectedDate, "yyyy-MM-dd");
-      fetch(`/api/availability?date=${dateStr}`)
+      const API = import.meta.env.VITE_API_URL || "";
+      fetch(`${API}/api/availability?date=${dateStr}`)
         .then((res) => res.json())
         .then(setSlots);
     }
@@ -51,7 +53,8 @@ export default function BookingFlow() {
     
     setLoading(true);
     try {
-      const res = await fetch("/api/bookings", {
+      const API = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${API}/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

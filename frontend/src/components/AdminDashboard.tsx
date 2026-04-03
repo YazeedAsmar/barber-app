@@ -34,9 +34,10 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   const fetchData = async () => {
     try {
+      const API = import.meta.env.VITE_API_URL || "";
       const [bookingsRes, servicesRes] = await Promise.all([
-        fetch("/api/admin/bookings"),
-        fetch("/api/services")
+        fetch(`${API}/api/admin/bookings`),
+        fetch(`${API}/api/services`)
       ]);
       const bookingsData = await bookingsRes.json();
       const servicesData = await servicesRes.json();
@@ -72,7 +73,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const handleCancel = async (id: string) => {
     if (!confirm(t('admin_cancel_confirm'))) return;
     try {
-      const res = await fetch(`/api/admin/bookings/${id}`, { method: "DELETE" });
+      const API = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${API}/api/admin/bookings/${id}`, { method: "DELETE" });
       if (res.ok) fetchData();
     } catch (err) {
       console.error("Failed to cancel booking", err);
@@ -81,7 +83,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   const handleComplete = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/bookings/${id}/complete`, { method: "PUT" });
+      const API = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${API}/api/admin/bookings/${id}/complete`, { method: "PUT" });
       if (res.ok) fetchData();
     } catch (err) {
       console.error("Failed to complete booking", err);
@@ -90,7 +93,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   const handleBlockSlot = async () => {
     try {
-      const res = await fetch("/api/admin/block", {
+      const API = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${API}/api/admin/block`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ date: blockDate, time: blockTime }),

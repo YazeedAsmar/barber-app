@@ -29,7 +29,8 @@ export default function ClientDashboard() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`/api/client/bookings?phone=${encodeURIComponent(phone)}`);
+      const API = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${API}/api/client/bookings?phone=${encodeURIComponent(phone)}`);
       if (!res.ok) throw new Error("Failed to fetch bookings");
       const data = await res.json();
       setBookings(data.sort((a: Booking, b: Booking) => b.date.localeCompare(a.date) || b.time.localeCompare(a.time)));

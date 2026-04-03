@@ -16,7 +16,8 @@ export default function ServicesPage({ onBook }: { onBook: () => void }) {
   const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
-    fetch("/api/services")
+    const API = import.meta.env.VITE_API_URL || "";
+    fetch(`${API}/api/services`)
       .then((res) => res.json())
       .then(setServices);
   }, []);

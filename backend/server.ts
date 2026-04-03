@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-// import cors from "cors"; // Removed cors to avoid missing pkg if they didn't have it installed
+import cors from "cors";
 import dotenv from "dotenv";
 import apiRoutes from "./routes/apiRoutes.js";
 
@@ -15,7 +15,10 @@ async function startServer() {
 
   // Middleware
   app.use(express.json());
-  // app.use(cors());
+  app.use(cors({
+    origin: 'https://barber-app.vercel.app', // رابط Vercel الخاص بك
+    credentials: true
+  }));
 
   // Create HTTP Server for both Express and Socket.io
   const httpServer = createServer(app);
