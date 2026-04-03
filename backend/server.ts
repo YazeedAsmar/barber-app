@@ -16,8 +16,13 @@ async function startServer() {
   // Middleware
   app.use(express.json());
   app.use(cors({
-    origin: 'https://barber-app.vercel.app', // رابط Vercel الخاص بك
-    credentials: true
+    origin: [
+      'https://barber-app-7krs.vercel.app',  // رابط Vercel الخاص بك
+      'http://localhost:5173'                  // للتطوير المحلي
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
 
   // Create HTTP Server for both Express and Socket.io
