@@ -16,9 +16,16 @@ export const getAvailability = (req: Request, res: Response) => {
   const blockedTimes = new Set(blocked.map(b => b.time));
 
   const slots = [];
-  const startTime = "09:00";
-  const endTime = "18:00";
+  const startTime = "13:00"; // 1:00 PM
+  const endTime = "22:00";   // 10:00 PM
   const interval = 30;
+
+  // Check if it's Monday
+  const dayOfWeek = parseISO(date).getDay();
+  if (dayOfWeek === 1) { // 1 = Monday
+    res.json([]);
+    return;
+  }
 
   let current = parseISO(`${date}T${startTime}`);
   const end = parseISO(`${date}T${endTime}`);

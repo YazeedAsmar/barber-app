@@ -15,9 +15,9 @@ export const translations: Translations = {
   nav_admin: { en: 'Barber Access', ar: 'دخول الحلاق' },
   
   // Hero
-  hero_title_1: { en: 'LOOK SHARP.', ar: 'مظهر حاد.' },
-  hero_title_2: { en: 'FEEL CLEAN.', ar: 'شعور نظيف.' },
-  hero_subtitle: { en: 'Experience the ultimate blend of tradition and modern style at Obsidian & Gold.', ar: 'استمتع بمزيج مثالي من التقاليد والأسلوب العصري في أوبسيديان آند جولد.' },
+  hero_title_1: { en: 'LOAI .', ar: 'لؤي .' },
+  hero_title_2: { en: 'ALHNDI', ar: 'الهندي' },
+  hero_subtitle: { en: 'Experience premium masculine grooming at LOAI . ALHNDI Barbershop.', ar: 'استمتع بحلاقة رجالية فاخرة في صالون لؤي الهندي.' },
   hero_cta: { en: 'Book Your Experience', ar: 'احجز تجربتك' },
   hero_badge: { en: 'Premium Barbershop', ar: 'صالون حلاقة فاخر' },
 
@@ -27,13 +27,13 @@ export const translations: Translations = {
 
   // Info Cards
   info_location_title: { en: 'Location', ar: 'الموقع' },
-  info_location_desc: { en: '123 Barber Street, Downtown City, NY 10001', ar: 'شارع الحلاق 123، وسط المدينة، نيويورك 10001' },
-  info_hours_title: { en: 'Hours', ar: 'ساعات العمل' },
-  info_hours_line1: { en: 'Mon - Sat: 9am - 6pm', ar: 'الاثنين - السبت: 9ص - 6م' },
-  info_hours_line2: { en: 'Sunday: Closed', ar: 'الأحد: مغلق' },
-  info_contact_title: { en: 'Contact', ar: 'اتصل بنا' },
-  info_contact_phone: { en: '+1 (555) 123-4567', ar: '+1 (555) 123-4567' },
-  info_contact_email: { en: 'hello@sharpclean.com', ar: 'hello@sharpclean.com' },
+  info_location_desc: { en: 'Main Street, Downtown', ar: 'الشارع الرئيسي، وسط المدينة' },
+  info_hours_title: { en: 'Working Hours', ar: 'ساعات العمل' },
+  info_hours_line1: { en: 'Everyday: 1:00 PM - 10:00 PM', ar: 'يومياً: 1:00 م - 10:00 م' },
+  info_hours_line2: { en: 'Monday: Closed (Day Off)', ar: 'الاثنين: مغلق (يوم عطلة)' },
+  info_contact_title: { en: 'Contact Us', ar: 'اتصل بنا' },
+  info_contact_phone: { en: '0788248382', ar: '0788248382' },
+  info_contact_email: { en: 'info@loai-alhndi.com', ar: 'info@loai-alhndi.com' },
 
   // Services
   services_title: { en: 'Our Services', ar: 'خدماتنا' },
@@ -91,7 +91,7 @@ export const translations: Translations = {
   admin_no_upcoming: { en: 'No upcoming bookings.', ar: 'لا توجد حجوزات قادمة.' },
 
   // Footer
-  footer_rights: { en: '© 2026 Sharp & Clean Barbershop. All rights reserved.', ar: '© 2026 شارب آند كلين للحلاقة. جميع الحقوق محفوظة.' },
+  footer_rights: { en: '© 2026 Angle48. All rights reserved.', ar: '© 2026 Angle48. جميع الحقوق محفوظة.' },
 };
 
 interface LanguageContextType {

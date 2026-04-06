@@ -39,12 +39,14 @@ db.exec(`
 `);
 
 // Seed default services if they don't exist
-const insertService = db.prepare(`INSERT OR IGNORE INTO services (id, name, nameAr, duration, price) VALUES (@id, @name, @nameAr, @duration, @price)`);
+const insertService = db.prepare(`INSERT OR REPLACE INTO services (id, name, nameAr, duration, price) VALUES (@id, @name, @nameAr, @duration, @price)`);
 const seedServices = db.transaction(() => {
-  insertService.run({ id: "1", name: "Classic Haircut", nameAr: "قص شعر كلاسيكي", duration: 30, price: 25 });
+  insertService.run({ id: "1", name: "Haircut", nameAr: "قص شعر", duration: 30, price: 25 });
   insertService.run({ id: "2", name: "Beard Trim", nameAr: "تشذيب اللحية", duration: 20, price: 15 });
-  insertService.run({ id: "3", name: "Haircut & Beard", nameAr: "قص شعر ولحية", duration: 50, price: 35 });
-  insertService.run({ id: "4", name: "Hot Towel Shave", nameAr: "حلاقة بالمنشفة الساخنة", duration: 30, price: 20 });
+  insertService.run({ id: "3", name: "Blow Dry", nameAr: "سيشوار", duration: 15, price: 10 });
+  insertService.run({ id: "4", name: "Hair Treatment (Protein)", nameAr: "معالجة الشعر (بروتين)", duration: 60, price: 50 });
+  insertService.run({ id: "5", name: "Deep Skin Cleaning", nameAr: "تنظيف بشرة عميق بالبخار", duration: 45, price: 30 });
+  insertService.run({ id: "6", name: "Laser Skin Treatment", nameAr: "علاج البشرة بالليزر", duration: 40, price: 60 });
 });
 seedServices();
 

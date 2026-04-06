@@ -75,9 +75,18 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     try {
       const API = import.meta.env.VITE_API_URL || "";
       const res = await fetch(`${API}/api/admin/bookings/${id}`, { method: "DELETE" });
-      if (res.ok) fetchData();
+      if (res.ok) {
+        // Optimistic UI update: remove from current state immediately
+        setBookings(prev => prev.filter(b => b.id !== id));
+        // Follow-up with refresh to ensure sync
+        fetchData();
+      } else {
+        const data = await res.json();
+        alert(data.error || "Failed to cancel booking");
+      }
     } catch (err) {
       console.error("Failed to cancel booking", err);
+      alert("Network error. Please check your connection.");
     }
   };
 

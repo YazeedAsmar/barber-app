@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Scissors, Calendar, ShieldCheck, Menu, X, Instagram, Facebook, Twitter, MapPin, Phone, Clock, Zap, Sparkles, Globe, User } from "lucide-react";
+import { Scissors, Calendar, ShieldCheck, Menu, X, Instagram, MapPin, Phone, Clock, Zap, Sparkles, Globe, User } from "lucide-react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import BookingFlow from "./components/BookingFlow";
 import AdminDashboard from "./components/AdminDashboard";
@@ -131,7 +131,7 @@ function App() {
               <div className="w-10 h-10 gold-gradient rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12 shadow-lg shadow-trendy-primary/20">
                 <Scissors className="w-6 h-6 text-obsidian" />
               </div>
-              <span className="text-xl font-black tracking-tighter uppercase gold-text-gradient">Sharp & Clean</span>
+              <span className="text-xl font-black tracking-tighter uppercase gold-text-gradient">LOAI . ALHNDI</span>
             </div>
 
             {/* Desktop Nav */}
@@ -309,7 +309,7 @@ function App() {
               {[
                 { icon: <MapPin className="w-8 h-8 mb-4 text-trendy-primary" />, title: t("info_location_title"), desc: t("info_location_desc") },
                 { icon: <Clock className="w-8 h-8 mb-4 text-trendy-primary" />, title: t("info_hours_title"), desc: <>{t("info_hours_line1")}<br />{t("info_hours_line2")}</> },
-                { icon: <Phone className="w-8 h-8 mb-4 text-trendy-primary" />, title: t("info_contact_title"), desc: <>{t("info_contact_phone")}<br />{t("info_contact_email")}</> },
+                { icon: <Phone className="w-8 h-8 mb-4 text-trendy-primary" />, title: t("info_contact_title"), desc: <a href="tel:0788248382" className="hover:text-trendy-primary transition-colors">0788248382</a> },
               ].map((card, i) => (
                 <motion.div
                   key={i}
@@ -385,12 +385,12 @@ function App() {
               <div className="w-8 h-8 bg-trendy-primary rounded-lg flex items-center justify-center">
                 <Scissors className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-black tracking-tighter uppercase text-trendy-text">Sharp & Clean</span>
+              <span className="text-lg font-black tracking-tighter uppercase text-trendy-text">LOAI . ALHNDI</span>
             </div>
             <div className="flex gap-6">
-              <Instagram className="w-5 h-5 text-trendy-muted hover:text-trendy-primary cursor-pointer transition-colors" />
-              <Facebook className="w-5 h-5 text-trendy-muted hover:text-trendy-primary cursor-pointer transition-colors" />
-              <Twitter className="w-5 h-5 text-trendy-muted hover:text-trendy-primary cursor-pointer transition-colors" />
+              <a href="https://www.instagram.com/loiy_a_lhndi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-5 h-5 text-trendy-muted hover:text-trendy-primary cursor-pointer transition-colors" />
+              </a>
             </div>
             <p className="text-sm text-trendy-muted">{t("footer_rights")}</p>
           </div>

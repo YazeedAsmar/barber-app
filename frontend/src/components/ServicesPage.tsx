@@ -22,12 +22,14 @@ export default function ServicesPage({ onBook }: { onBook: () => void }) {
       .then(setServices);
   }, []);
 
-  const icons = [
-    <Scissors className="w-6 h-6" />,
-    <Zap className="w-6 h-6" />,
-    <Wind className="w-6 h-6" />,
-    <Sparkles className="w-6 h-6" />,
-  ];
+  const icons: { [key: string]: React.ReactNode } = {
+    "1": <Scissors className="w-6 h-6" />, // Haircut
+    "2": <User className="w-6 h-6" />,     // Beard Trim
+    "3": <Wind className="w-6 h-6" />,     // Blow Dry
+    "4": <Sparkles className="w-6 h-6" />, // Hair Treatment
+    "5": <Zap className="w-6 h-6" />,      // Deep Skin Cleaning
+    "6": <Sparkles className="w-6 h-6" />, // Laser Skin Treatment
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-12">
@@ -49,7 +51,7 @@ export default function ServicesPage({ onBook }: { onBook: () => void }) {
           >
             <div className="flex justify-between items-start mb-6 relative z-10">
               <div className="w-12 h-12 bg-trendy-primary/10 rounded-2xl flex items-center justify-center text-trendy-primary group-hover:gold-gradient group-hover:text-obsidian transition-all">
-                {icons[index % icons.length]}
+                {icons[service.id] || <Scissors className="w-6 h-6" />}
               </div>
               <span className="text-2xl font-black gold-text-gradient">${service.price}</span>
             </div>

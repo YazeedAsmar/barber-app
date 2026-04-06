@@ -30,7 +30,7 @@ export const getAllAdminBookings = () => {
 };
 
 export const cancelBooking = (id: string) => {
-  return db.prepare(`UPDATE bookings SET status = 'cancelled' WHERE id = ?`).run(id);
+  return db.prepare(`DELETE FROM bookings WHERE id = ?`).run(id);
 };
 
 export const completeBooking = (id: string) => {
