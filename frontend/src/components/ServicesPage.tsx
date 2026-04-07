@@ -44,10 +44,11 @@ export default function ServicesPage({ onBook }: { onBook: () => void }) {
         {services.map((service, index) => (
           <motion.div
             key={service.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="group p-6 bg-trendy-card rounded-3xl border border-white/5 hover:border-trendy-primary/50 transition-all hover:shadow-2xl hover:shadow-trendy-primary/10 shimmer-bg"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3) }}
+            className="group p-6 bg-trendy-card rounded-3xl border border-white/5 hover:border-trendy-primary/50 transition-all hover:shadow-2xl hover:shadow-trendy-primary/10 shimmer-bg will-change-transform"
           >
             <div className="flex justify-between items-start mb-6 relative z-10">
               <div className="w-12 h-12 bg-trendy-primary/10 rounded-2xl flex items-center justify-center text-trendy-primary group-hover:gold-gradient group-hover:text-obsidian transition-all">

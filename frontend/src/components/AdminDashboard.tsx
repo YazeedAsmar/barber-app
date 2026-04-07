@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { format, isToday, parseISO } from "date-fns";
 import { io } from "socket.io-client";
-import { Calendar, Clock, User, Phone, Trash2, ShieldAlert, LogOut, Loader2, Search, CheckCircle } from "lucide-react";
+import { Calendar, Clock, User, Phone, Trash2, ShieldAlert, LogOut, Loader2, Search, CheckCircle, AlertTriangle, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "../lib/utils";
 import { useLanguage } from "../i18n";
@@ -31,6 +31,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [blockDate, setBlockDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [blockTime, setBlockTime] = useState("09:00");
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const fetchData = async () => {
     try {
@@ -70,8 +71,14 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     };
   }, []);
 
-  const handleCancel = async (id: string) => {
-    if (!confirm(t('admin_cancel_confirm'))) return;
+  const handleCancelClick = (id: string) => {
+    setDeleteId(id);
+  };
+
+  const confirmCancel = async () => {
+    if (!deleteId) return;
+    const id = deleteId;
+    setDeleteId(null);
     try {
       const API = import.meta.env.VITE_API_URL || "";
       const res = await fetch(`${API}/api/admin/bookings/${id}`, { method: "DELETE" });
@@ -182,7 +189,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <p className="text-trendy-muted text-center py-6 bg-white/5 rounded-xl border border-dashed border-white/10">{t('admin_no_today')}</p>
             ) : (
               todayBookings.map((b) => (
-                <BookingCard key={b.id} booking={b} serviceName={getServiceName(b.serviceId)} onCancel={handleCancel} onComplete={handleComplete} />
+                <BookingCard key={b.id} booking={b} serviceName={getServiceName(b.serviceId)} onCancel={handleCancelClick} onComplete={handleComplete} />
               ))
             )}
           </div>
@@ -197,7 +204,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <p className="text-trendy-muted text-center py-6 bg-white/5 rounded-xl border border-dashed border-white/10">{t('admin_no_upcoming')}</p>
             ) : (
               upcomingBookings.map((b) => (
-                <BookingCard key={b.id} booking={b} serviceName={getServiceName(b.serviceId)} onCancel={handleCancel} onComplete={handleComplete} showDate />
+                <BookingCard key={b.id} booking={b} serviceName={getServiceName(b.serviceId)} onCancel={handleCancelClick} onComplete={handleComplete} showDate />
               ))
             )}
           </div>
@@ -231,6 +238,64 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           </div>
         </section>
       </div>
+
+      {/* Custom Confirmation Modal */}
+      <AnimatePresence>
+        {deleteId && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setDeleteId(null)}
+              className="absolute inset-0 bg-obsidian/80 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-sm bg-trendy-card border border-white/10 rounded-[2rem] p-8 shadow-2xl overflow-hidden shimmer-bg"
+            >
+              <div className="absolute top-0 inset-x-0 h-1 bg-red-500/50" />
+              
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mb-6">
+                  <AlertTriangle className="w-8 h-8 text-red-500" />
+                </div>
+                
+                <h3 className="text-xl font-black text-trendy-text mb-2">
+                  {isRTL ? "تأكيد الإلغاء" : "Confirm Cancel"}
+                </h3>
+                <p className="text-trendy-muted text-sm mb-8 leading-relaxed">
+                  {t('admin_cancel_confirm')}
+                </p>
+                
+                <div className="grid grid-cols-2 gap-3 w-full">
+                  <button
+                    onClick={() => setDeleteId(null)}
+                    className="cursor-pointer py-3 px-6 rounded-xl bg-white/5 text-trendy-text font-bold hover:bg-white/10 transition-all border border-white/5"
+                  >
+                    {t('booking_back')}
+                  </button>
+                  <button
+                    onClick={confirmCancel}
+                    className="cursor-pointer py-3 px-6 rounded-xl bg-red-500 text-white font-bold hover:bg-red-600 transition-all shadow-lg shadow-red-500/20"
+                  >
+                    {isRTL ? "إلغاء الحجز" : "Cancel Booking"}
+                  </button>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => setDeleteId(null)}
+                className="cursor-pointer absolute top-4 right-4 text-trendy-muted hover:text-trendy-text p-1 transition-colors hover:bg-white/5 rounded-full"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
